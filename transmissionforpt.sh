@@ -12,6 +12,11 @@ echo "# Author: Haknima                                         #"
 echo "###########################################################"
 echo
 
+read -p "请输入 transmission 账号 (默认账号:zhanghao): " UserName
+read -p "请输入 transmission 密码 (默认密码:mima): " PassWord
+read -p "请输入 transmission 端口 (默认端口:9091): " Port
+read -p "请输入 rss 链接: " links
+
 #清空删除transmission
 service transmissiond stop
 killall -9 transmission-da
@@ -20,8 +25,9 @@ rm -rf /usr/share/transmission
 rm -rf /etc/init.d/transmissiond
 
 #依赖
-yum install -y wget xz gcc gcc-c++ m4 make automake libtool gettext openssl-devel pkgconfig perl-libwww-perl perl-XML-Parser curl curl-devel libidn-devel zlib-devel which libevent
+yum install -y xz gcc gcc-c++ m4 make automake libtool gettext openssl-devel pkgconfig perl-libwww-perl perl-XML-Parser curl curl-devel libidn-devel zlib-devel which libevent
 yum install -y zlib zlib-devel readline-devel sqlite sqlite-devel openssl-devel mysql-devel gd-devel openjpeg-devel
+yum -y install vixie-cron crontabs
 
 #依赖包
 cd /root
@@ -70,10 +76,7 @@ mv -f settings.json /home/transmission/.config/transmission/settings.json
 chown -R transmission.transmission /home/transmission
 
 #修改配置信息
-read -p "请输入 transmission 账号 (默认账号:zhangha): " UserName
-read -p "请输入 transmission 密码 (默认密码:mima): " PassWord
-read -p "请输入 transmission 端口 (默认端口:9091): " Port
-sed -i "s#zhangha#${UserName}#" /home/transmission/.config/transmission/settings.json
+sed -i "s#zhanghao#${UserName}#" /home/transmission/.config/transmission/settings.json
 sed -i "s#mima#${PassWord}#" /home/transmission/.config/transmission/settings.json
 sed -i "s#9091#${Port}#" /home/transmission/.config/transmission/settings.json
 
@@ -120,15 +123,13 @@ virtualenv /root/flexget
 mkdir /home/transmission/Torrents
 wget https://github.com/Haknima/Transmission/raw/master/config.yml
 mv config.yml /root/flexget
-read -p "请输入 rss 链接: " links
 sed -i "s#links#${links}#" /root/flexget/config.yml
-sed -i "s#zhangha#${UserName}#" /root/flexget/config.yml
+sed -i "s#zhanghao#${UserName}#" /root/flexget/config.yml
 sed -i "s#mima#${PassWord}#" /root/flexget/config.yml
 sed -i "s#9091#${Port}#" /root/flexget/config.yml
 /root/flexget/bin/flexget -c /root/flexget/config.yml execute
 
 #定时任务
-yum -y install vixie-cron crontabs
 echo 'SHELL=/bin/bash' >> /var/spool/cron/root
 echo 'PATH=/sbin:/bin:/usr/sbin:/usr/bin' >> /var/spool/cron/root
 echo '*/5 * * * * /root/flexget/bin/flexget -c /root/flexget/config.yml execute' >> /var/spool/cron/root
@@ -136,8 +137,8 @@ echo '*/5 * * * * /root/flexget/bin/flexget -c /root/flexget/config.yml execute'
 
 #完成
 echo "#############################################################"
-echo "# 安装完成                                                   #"
-echo "# 用户名: ${UserName} 密码: ${PassWord} 端口: ${Port}         #"
-echo "# Web 地址为： http://ip:${Port}                              #"
-echo "# Github: https://github.com/Haknima/Transmission            #"
+echo "安装完成                                                     "
+echo "用户名: ${UserName} 密码: ${PassWord} 端口: ${Port}           "
+echo "Web 地址为： http://ip:${Port}                                "
+echo "Github: https://github.com/Haknima/Transmission              "
 echo "#############################################################"
