@@ -55,7 +55,6 @@ make -s
 make -s install
 
 #配置文件
-cd /root
 useradd -m transmission
 passwd -d transmission
 mv transmission.sh /etc/init.d/transmissiond
@@ -65,6 +64,7 @@ chkconfig --level 2345 transmissiond on
 mkdir -p /home/transmission/Downloads/
 chmod g+w /home/transmission/Downloads/
 mkdir -p /home/transmission/.config/transmission/
+cd /root
 wget https://github.com/Haknima/One-click-pt/raw/master/settings.json
 mv -f settings.json /home/transmission/.config/transmission/settings.json
 chown -R transmission.transmission /home/transmission
