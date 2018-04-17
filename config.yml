@@ -7,4 +7,4 @@ tasks:
       host: 127.0.0.1
       port: 9091
       username: zhanghao
-      password: mima
+      password: "mima"
