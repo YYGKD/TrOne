@@ -7,7 +7,7 @@ clear
 echo
 echo "###########################################################"
 echo "# One click Install transmission script for Centos 7      #"
-echo "# Github: https://github.com/Haknima/One-click-pt         #"
+echo "# Github: https://github.com/Haknima/Transmission         #"
 echo "# Author: Haknima                                         #"
 echo "###########################################################"
 echo
@@ -25,7 +25,7 @@ yum install -y zlib zlib-devel readline-devel sqlite sqlite-devel openssl-devel 
 
 #依赖包
 cd /root
-wget https://github.com/Haknima/One-click-pt/raw/master/intltool-0.40.6.tar.gz
+wget https://github.com/Haknima/Transmission/raw/master/intltool-0.40.6.tar.gz
 tar -zxf intltool-0.40.6.tar.gz
 cd intltool-0.40.6
 ./configure --prefix=/usr
@@ -33,7 +33,7 @@ make -s
 make -s install
 
 cd /root
-wget https://github.com/Haknima/One-click-pt/raw/master/libevent-2.0.21-stable.tar.gz
+wget https://github.com/Haknima/Transmission/raw/master/libevent-2.0.21-stable.tar.gz
 tar -zxf libevent-2.0.21-stable.tar.gz
 cd libevent-2.0.21-stable
 ./configure
@@ -47,7 +47,7 @@ ln -s /usr/lib/libevent-2.0.so.5.1.9 /usr/local/lib/libevent-2.0.so.5.1.9
 
 #主程序
 cd /root
-wget https://github.com/Haknima/One-click-pt/raw/master/transmission-2.84.tar.gz
+wget https://github.com/Haknima/Transmission/raw/master/transmission-2.84.tar.gz
 tar -zxf transmission-2.84.tar.gz
 cd transmission-2.84
 ./configure --prefix=/usr
@@ -65,7 +65,7 @@ mkdir -p /home/transmission/Downloads/
 chmod g+w /home/transmission/Downloads/
 mkdir -p /home/transmission/.config/transmission/
 cd /root
-wget https://github.com/Haknima/One-click-pt/raw/master/settings.json
+wget https://github.com/Haknima/Transmission/raw/master/settings.json
 mv -f settings.json /home/transmission/.config/transmission/settings.json
 chown -R transmission.transmission /home/transmission
 
@@ -102,6 +102,42 @@ iptables -t raw -P OUTPUT ACCEPT
 service iptables save
 
 #安装美化
+cd /root
 wget https://github.com/ronggang/transmission-web-control/raw/master/release/install-tr-control-cn.sh
 bash install-tr-control-cn.sh
 service transmissiond start
+
+#flexget
+cd /root
+wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate
+python get-pip.py
+pip install virtualenv
+virtualenv /root/flexget
+/root/flexget/bin/pip install flexget
+/root/flexget/bin/pip install transmissionrpc
+
+#flexget 配置
+mkdir /home/transmission/Torrents
+wget https://github.com/Haknima/Transmission/raw/master/config.yml
+mv config.yml /root/flexget
+read -p "请输入 rss 链接: " links
+sed -i "s#links#${links}#" /root/flexget/config.yml
+sed -i "s#zhangha#${UserName}#" /root/flexget/config.yml
+sed -i "s#mima#${PassWord}#" /root/flexget/config.yml
+sed -i "s#9091#${Port}#" /root/flexget/config.yml
+/root/flexget/bin/flexget -c /root/flexget/config.yml execute
+
+#定时任务
+yum -y install vixie-cron crontabs
+echo 'SHELL=/bin/bash' >> /var/spool/cron/root
+echo 'PATH=/sbin:/bin:/usr/sbin:/usr/bin' >> /var/spool/cron/root
+echo '*/5 * * * * /root/flexget/bin/flexget -c /root/flexget/config.yml execute' >> /var/spool/cron/root
+/sbin/service crond restart
+
+#完成
+echo "#############################################################"
+echo "# 安装完成                                                   #"
+echo "# 用户名: ${UserName} 密码: ${PassWord} 端口: ${Port}         #"
+echo "# Web 地址为： http://ip:${Port}                              #"
+echo "# Github: https://github.com/Haknima/Transmission            #"
+echo "#############################################################"
