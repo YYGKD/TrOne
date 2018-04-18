@@ -31,7 +31,7 @@ yum -y install vixie-cron crontabs
 
 #依赖包
 cd /root
-wget https://github.com/Haknima/Transmission/raw/master/intltool-0.40.6.tar.gz
+wget https://github.com/Haknima/Transmission/raw/master/package/intltool-0.40.6.tar.gz
 tar -zxf intltool-0.40.6.tar.gz
 cd intltool-0.40.6
 ./configure --prefix=/usr
@@ -39,7 +39,7 @@ make -s
 make -s install
 
 cd /root
-wget https://github.com/Haknima/Transmission/raw/master/libevent-2.0.21-stable.tar.gz
+wget https://github.com/Haknima/Transmission/raw/master/package/libevent-2.0.21-stable.tar.gz
 tar -zxf libevent-2.0.21-stable.tar.gz
 cd libevent-2.0.21-stable
 ./configure
@@ -53,7 +53,7 @@ ln -s /usr/lib/libevent-2.0.so.5.1.9 /usr/local/lib/libevent-2.0.so.5.1.9
 
 #主程序
 cd /root
-wget https://github.com/Haknima/Transmission/raw/master/transmission-2.84.tar.gz
+wget https://github.com/Haknima/Transmission/raw/master/package/transmission-2.84.tar.gz
 tar -zxf transmission-2.84.tar.gz
 cd transmission-2.84
 ./configure --prefix=/usr
@@ -61,17 +61,18 @@ make -s
 make -s install
 
 #配置文件
+cd /root
 useradd -m transmission
 passwd -d transmission
-mv transmission.sh /etc/init.d/transmissiond
+wget https://github.com/Haknima/Transmission/raw/master/init.d/transmissiond
+mv transmissiond /etc/init.d
 chmod 755 /etc/init.d/transmissiond
 chkconfig --add transmissiond
 chkconfig --level 2345 transmissiond on
 mkdir -p /home/transmission/Downloads/
 chmod g+w /home/transmission/Downloads/
 mkdir -p /home/transmission/.config/transmission/
-cd /root
-wget https://github.com/Haknima/Transmission/raw/master/settings.json
+wget https://github.com/Haknima/Transmission/raw/master/conf/settings.json
 mv -f settings.json /home/transmission/.config/transmission/settings.json
 chown -R transmission.transmission /home/transmission
 
@@ -121,7 +122,7 @@ virtualenv /root/flexget
 
 #flexget 配置
 mkdir /home/transmission/Torrents
-wget https://github.com/Haknima/Transmission/raw/master/config.yml
+wget https://github.com/Haknima/Transmission/raw/master/conf/config.yml
 mv config.yml /root/flexget
 sed -i "s#links#${links}#" /root/flexget/config.yml
 sed -i "s#zhanghao#${UserName}#" /root/flexget/config.yml
