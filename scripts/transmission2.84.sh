@@ -71,5 +71,5 @@ sed -i "s#9091#${Port}#" /home/transmission/.config/transmission/settings.json
 #安装美化
 cd /root
 wget https://github.com/ronggang/transmission-web-control/raw/master/release/install-tr-control-cn.sh
-bash install-tr-control-cn.sh
-service transmissiond start
+bash install-tr-control-cn.sh auto
+service transmissiond restart
