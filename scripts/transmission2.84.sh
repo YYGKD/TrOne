@@ -72,4 +72,4 @@ sed -i "s#9091#${Port}#" /home/transmission/.config/transmission/settings.json
 cd /root
 wget https://github.com/ronggang/transmission-web-control/raw/master/release/install-tr-control-cn.sh
 bash install-tr-control-cn.sh auto
-service transmissiond restart
+service transmissiond start
