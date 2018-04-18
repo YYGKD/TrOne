@@ -41,8 +41,8 @@ ln -s /usr/lib/libevent-2.0.so.5.1.9 /usr/local/lib/libevent-2.0.so.5.1.9
 
 #主程序
 cd /root
-wget https://github.com/Haknima/Transmission/raw/master/package/transmission-2.84.tar.gz
-tar -zxf transmission-2.84.tar.gz
+wget https://github.com/Haknima/Transmission/raw/master/package/transmission-2.84.tar.xz
+tar -xf transmission-2.84.tar.xz
 cd transmission-2.84
 ./configure --prefix=/usr
 make && make install
