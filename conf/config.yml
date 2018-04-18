@@ -1,0 +1,10 @@
+tasks:
+  pt:
+    rss: links
+    accept_all: yes
+    download: /home/transmission/Torrents
+    transmission:
+      host: 127.0.0.1
+      port: 9091
+      username: zhanghao
+      password: "mima"
