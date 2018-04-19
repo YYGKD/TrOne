@@ -9,11 +9,9 @@ centos
 <pre><code> wget https://github.com/Haknima/TrOne/raw/master/TrOne.sh && bash TrOne.sh </code></pre>
 
 # transmission 管理命令
-<pre><code> 
-  service transmissiond {start|stop|restart|status}
-  或者
-  systemctl {start|stop|restart|status} transmissiond.service
-</code></pre>
+<pre><code> service transmissiond {start|stop|restart|status}</code></pre>
+或者
+<pre><code> systemctl {start|stop|restart|status} transmissiond.service</code></pre>
 
 默认账号： zhanghao
 <br/>
