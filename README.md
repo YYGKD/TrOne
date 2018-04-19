@@ -6,11 +6,9 @@ Transmission 与 Flexget 的一键脚本，仅支持centos。
 centos
 
 # 使用
-
 <pre><code> wget https://github.com/Haknima/TrOne/raw/master/TrOne.sh && bash TrOne.sh </code></pre>
 
 #transmission 管理命令
-
 <pre><code> 
   service transmissiond {start|stop|restart|status}
   或者
