@@ -59,6 +59,7 @@ install_transmission()
 	chkconfig --add transmissiond
 	chkconfig --level 2345 transmissiond on
 	mkdir -p /home/transmission/Downloads/
+	mkdir -p /home/transmission/tmp/
 	chmod g+w /home/transmission/Downloads/
 	mkdir -p /home/transmission/.config/transmission/
 	wget https://github.com/Haknima/TrOne/raw/master/conf/settings.json
