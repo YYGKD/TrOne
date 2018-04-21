@@ -37,8 +37,6 @@ install_start()
 	iptables -I INPUT -p tcp -m tcp --dport 22:65535 -j ACCEPT
 	iptables-save >/etc/sysconfig/iptables
 	echo 'iptables-restore /etc/sysconfig/iptables' >> /etc/rc.local
-	
-	install_transmission
 }
 
 install_transmission()
@@ -69,12 +67,13 @@ install_transmission()
 	sed -i "s#zhanghao#${UserName}#" /home/transmission/.config/transmission/settings.json
 	sed -i "s#mima#${PassWord}#" /home/transmission/.config/transmission/settings.json
 	sed -i "s#9091#${Port}#" /home/transmission/.config/transmission/settings.json
-	
+}
+
+install_web_control()
+{
 	wget https://github.com/ronggang/transmission-web-control/raw/master/release/install-tr-control-cn.sh
 	bash install-tr-control-cn.sh auto
 	service transmissiond start
-	
-	finishtr
 }
 
 install_flexget()
@@ -104,8 +103,6 @@ install_flexget()
 	echo 'PATH=/sbin:/bin:/usr/sbin:/usr/bin' >> /var/spool/cron/root
 	echo '*/5 * * * * /root/flexget/bin/flexget -c /root/flexget/config.yml execute' >> /var/spool/cron/root
 	service crond restart
-	
-	finishfl
 }
 
 showMenu() 
@@ -117,7 +114,8 @@ showMenu()
 	1. 安装 transmission2.93 + 美化；
 	2. 安装 transmission2.92 + 美化；
 	3. 安装 transmission2.84 + 美化；
-	4. 安装 flexget rss插件(需python2.7及以上版本)；
+	4. 安装或更新 transmission 美化；
+	5. 安装 flexget rss插件(需python2.7及以上版本)；
 
 	===================
 	0. 退出安装；
@@ -129,17 +127,30 @@ showMenu()
 		1)
 			version=2.93
 			install_start
+			install_transmission
+			install_web_control
+			finishtr
 			;;
 		2)
 			version=2.92
 			install_start
+			install_transmission
+			install_web_control
+			finishtr
 			;;
 		3)
 			version=2.84
 			install_start
+			install_transmission
+			install_web_control
+			finishtr
 			;;
 		4)
+			install_web_control
+			;;
+		5)
 			install_flexget
+			finishfl
 			;;
 		0)
 			exit -1
