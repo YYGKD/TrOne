@@ -70,9 +70,9 @@ install_transmission()
 	sed -i "s#zhanghao#${UserName}#" /home/transmission/.config/transmission/settings.json
 	UserName=${UserName:-"zhanghao"}
 	sed -i "s#mima#${PassWord}#" /home/transmission/.config/transmission/settings.json
-	PassWord=${UserName:-"mima"}
+	PassWord=${PassWord:-"mima"}
 	sed -i "s#9091#${Port}#" /home/transmission/.config/transmission/settings.json
-	Port=${UserName:-"9091"}
+	Port=${Port:-"9091"}
 }
 
 install_web_control()
