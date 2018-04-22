@@ -57,8 +57,11 @@ install_transmission()
 	chkconfig --add transmissiond
 	chkconfig --level 2345 transmissiond on
 	mkdir -p /home/transmission/Downloads/
-	mkdir -p /home/transmission/tmp/
 	chmod g+w /home/transmission/Downloads/
+	mkdir /home/transmission/Torrents/
+	chmod g+w /home/transmission/Torrents/
+	mkdir /home/transmission/tmp/
+	chmod g+w /home/transmission/tmp/
 	mkdir -p /home/transmission/.config/transmission/
 	wget https://github.com/Haknima/TrOne/raw/master/conf/settings.json
 	mv -f settings.json /home/transmission/.config/transmission/settings.json
@@ -92,13 +95,9 @@ install_flexget()
 	/root/flexget/bin/pip install flexget
 	/root/flexget/bin/pip install transmissionrpc
 
-	mkdir /home/transmission/Torrents
 	wget https://github.com/Haknima/TrOne/raw/master/conf/config.yml
 	mv config.yml /root/flexget
 	sed -i "s#links#${links}#" /root/flexget/config.yml
-	sed -i "s#zhanghao#${UserName}#" /root/flexget/config.yml
-	sed -i "s#mima#${PassWord}#" /root/flexget/config.yml
-	sed -i "s#9091#${Port}#" /root/flexget/config.yml
 	/root/flexget/bin/flexget -c /root/flexget/config.yml execute
 
 	yum -y install vixie-cron crontabs
