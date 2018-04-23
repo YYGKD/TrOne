@@ -80,6 +80,8 @@ install_transmission()
 	PassWord=${PassWord:-"mima"}
 	sed -i "s#9091#${Port}#" /home/transmission/.config/transmission/settings.json
 	Port=${Port:-"9091"}
+	
+	rm -rf intltool* libevent* transmission* libiconv*
 }
 
 install_web_control()
