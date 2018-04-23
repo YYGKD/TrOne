@@ -1,6 +1,6 @@
 tasks:
   pt:
-    rss: links
+    rss: weblink
     accept_all: yes
     download: /home/transmission/Torrents
     transmission:
