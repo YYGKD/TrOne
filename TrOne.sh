@@ -93,6 +93,9 @@ install_web_control()
 
 install_flexget()
 {
+	read -p "请输入 transmission 账号 (默认账号:zhanghao): " UserName
+	read -p "请输入 transmission 密码 (默认密码:mima): " PassWord
+	read -p "请输入 transmission 端口 (默认端口:9091): " Port
 	read -p "请输入 rss 链接: " links
 
 	cd /root
@@ -107,6 +110,13 @@ install_flexget()
 	wget https://github.com/Haknima/TrOne/raw/master/conf/config.yml
 	mv config.yml /root/flexget
 	sed -i "s#links#${links}#" /root/flexget/config.yml
+	sed -i "s#zhanghao#${UserName}#" /root/flexget/config.yml
+	UserName=${UserName:-"zhanghao"}
+	sed -i "s#mima#${PassWord}#" /root/flexget/config.yml
+	PassWord=${PassWord:-"mima"}
+	sed -i "s#9091#${Port}#" /root/flexget/config.yml
+	Port=${Port:-"9091"}
+	
 	/root/flexget/bin/flexget -c /root/flexget/config.yml execute
 	
 	rm -rf get-pip.py
