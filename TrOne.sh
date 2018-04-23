@@ -109,7 +109,7 @@ install_flexget()
 
 	wget https://github.com/Haknima/TrOne/raw/master/conf/config.yml
 	mv config.yml /root/flexget
-	sed -i "s#weblink#${weblink}#" /root/flexget/config.yml
+	sed -i "s#&#${weblink}#" /root/flexget/config.yml
 	sed -i "s#zhanghao#${UserName}#" /root/flexget/config.yml
 	UserName=${UserName:-"zhanghao"}
 	sed -i "s#mima#${PassWord}#" /root/flexget/config.yml
