@@ -32,6 +32,13 @@ install_start()
 	ln -s /usr/lib/libevent-2.0.so.5 /usr/local/lib/libevent-2.0.so.5
 	ln -s /usr/lib/libevent-2.0.so.5.1.9 /usr/local/lib/libevent-2.0.so.5.1.9
 	
+	cd /root
+	wget https://github.com/Haknima/TrOne/raw/master/package/libiconv-1.13.1.tar.gz
+	tar zxf libiconv-1.13.1.tar.gz
+	cd libiconv-1.13.1
+	./configure --prefix=/usr/
+	make && make install
+	
 	iptables -F
 	iptables -X  
 	iptables -I INPUT -p tcp -m tcp --dport 22:65535 -j ACCEPT
