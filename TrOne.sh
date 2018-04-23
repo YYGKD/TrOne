@@ -1,5 +1,5 @@
 #!/bin/bash
-
+sed -i 's#SELINUX=enforcing#SELINUX=disabled#' /etc/sysconfig/selinux
 install_start()
 {
 	read -p "请输入 transmission 账号 (默认账号:zhanghao): " UserName
