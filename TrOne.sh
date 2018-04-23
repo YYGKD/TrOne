@@ -85,7 +85,7 @@ install_transmission()
 install_web_control()
 {
 	wget https://github.com/ronggang/transmission-web-control/raw/master/release/install-tr-control-cn.sh
-	bash install-tr-control-cn.sh auto
+	bash install-tr-control-cn.sh /usr/share/transmission
 	service transmissiond start
 }
 
