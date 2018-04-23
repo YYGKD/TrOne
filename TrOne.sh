@@ -108,6 +108,8 @@ install_flexget()
 	mv config.yml /root/flexget
 	sed -i "s#links#${links}#" /root/flexget/config.yml
 	/root/flexget/bin/flexget -c /root/flexget/config.yml execute
+	
+	rm -rf get-pip.py
 
 	yum -y install vixie-cron crontabs
 	echo 'SHELL=/bin/bash' >> /var/spool/cron/root
