@@ -96,7 +96,7 @@ install_flexget()
 	read -p "请输入 transmission 账号 (默认账号:zhanghao): " UserName
 	read -p "请输入 transmission 密码 (默认密码:mima): " PassWord
 	read -p "请输入 transmission 端口 (默认端口:9091): " Port
-	read -p "请输入 rss 链接: " links
+	read -p "请输入 rss 链接: " weblink
 
 	cd /root
 	yum install -y zlib zlib-devel readline-devel sqlite sqlite-devel openssl-devel mysql-devel gd-devel openjpeg-devel
