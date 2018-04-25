@@ -21,7 +21,7 @@ install_start()
 	make && make install
 
 	cd /root
-	wget https://github.com/Haknima/TrOne/raw/master/package/libevent-2.1.8-stable.tar.gz
+	wget https://github.com/Haknima/TrOne/raw/master/package/libevent-2.0.21-stable.tar.gz
 	tar -zxf libevent*
 	cd libevent*
 	./configure
