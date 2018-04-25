@@ -18,26 +18,21 @@ install_start()
 	tar -zxf intltool*
 	cd intltool*
 	./configure --prefix=/usr
-	make && make install
+	make -s
+	make -sinstall
 
 	cd /root
 	wget https://github.com/Haknima/TrOne/raw/master/package/libevent-2.0.21-stable.tar.gz
 	tar -zxf libevent*
 	cd libevent*
 	./configure
-	make && make install
+	make -s
+	make -sinstall
 	export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 	ln -s /usr/local/lib/libevent-2.0.so.5 /usr/lib/libevent-2.0.so.5
 	ln -s /usr/local/lib/libevent-2.0.so.5.1.9 /usr/lib/libevent-2.0.so.5.1.9
 	ln -s /usr/lib/libevent-2.0.so.5 /usr/local/lib/libevent-2.0.so.5
 	ln -s /usr/lib/libevent-2.0.so.5.1.9 /usr/local/lib/libevent-2.0.so.5.1.9
-	
-	cd /root
-	wget https://github.com/Haknima/TrOne/raw/master/package/libiconv-1.13.1.tar.gz
-	tar zxf libiconv*
-	cd libiconv*
-	./configure --prefix=/usr/
-	make && make install
 	
 	iptables -F
 	iptables -X  
@@ -53,7 +48,8 @@ install_transmission()
 	tar -xf transmission*.tar.xz
 	cd transmission*
 	./configure --prefix=/usr CFLAGS=-liconv
-	make && make install
+	make -s
+	make -sinstall
 
 	cd /root
 	useradd -m transmission
