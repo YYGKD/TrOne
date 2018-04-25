@@ -15,15 +15,15 @@ install_start()
 
 	cd /root
 	wget https://github.com/Haknima/TrOne/raw/master/package/intltool-0.40.6.tar.gz
-	tar -zxf intltool-0.40.6.tar.gz
-	cd intltool-0.40.6
+	tar -zxf intltool*
+	cd intltool*
 	./configure --prefix=/usr
 	make && make install
 
 	cd /root
 	wget https://github.com/Haknima/TrOne/raw/master/package/libevent-2.1.8-stable.tar.gz
-	tar -zxf libevent-2.1.8-stable.tar.gz
-	cd libevent-2.1.8-stable
+	tar -zxf libevent*
+	cd libevent*
 	./configure
 	make && make install
 	export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
@@ -34,8 +34,8 @@ install_start()
 	
 	cd /root
 	wget https://github.com/Haknima/TrOne/raw/master/package/libiconv-1.13.1.tar.gz
-	tar zxf libiconv-1.13.1.tar.gz
-	cd libiconv-1.13.1
+	tar zxf libiconv*
+	cd libiconv*
 	./configure --prefix=/usr/
 	make && make install
 	
