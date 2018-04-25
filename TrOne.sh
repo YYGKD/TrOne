@@ -11,7 +11,7 @@ install_start()
 	rm -rf /home/transmission
 	rm -rf /usr/share/transmission
 	rm -rf /etc/init.d/transmissiond
-	yum install -y xz gcc gcc-c++ m4 make automake libtool gettext openssl-devel pkgconfig perl-libwww-perl perl-XML-Parser curl curl-devel libidn-devel zlib-devel which libevent
+	yum install -y epel-release xz gcc gcc-c++ m4 make automake libtool gettext openssl-devel pkgconfig perl-libwww-perl perl-XML-Parser curl curl-devel libidn-devel zlib-devel which libevent
 
 	cd /root
 	wget https://github.com/Haknima/TrOne/raw/master/package/intltool-0.40.6.tar.gz
@@ -21,9 +21,9 @@ install_start()
 	make && make install
 
 	cd /root
-	wget https://github.com/Haknima/TrOne/raw/master/package/libevent-2.0.21-stable.tar.gz
-	tar -zxf libevent-2.0.21-stable.tar.gz
-	cd libevent-2.0.21-stable
+	wget https://github.com/Haknima/TrOne/raw/master/package/libevent-2.1.8-stable.tar.gz
+	tar -zxf libevent-2.1.8-stable.tar.gz
+	cd libevent-2.1.8-stable.tar.gz
 	./configure
 	make && make install
 	export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
