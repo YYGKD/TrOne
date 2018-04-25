@@ -25,7 +25,7 @@ install_start()
 	wget https://github.com/Haknima/TrOne/raw/master/package/libiconv-1.13.1.tar.gz	
 	tar zxf libiconv*	
 	cd libiconv*	
-	./configure --prefix=/usr/	
+	./configure --prefix==/usr/local/libiconv
 	make -s
 	make -s install
 
@@ -36,6 +36,7 @@ install_start()
 	./configure
 	make -s
 	make -s install
+	echo "/usr/local/lib" >> /etc/ld.so.conf /sbin/ldconfig
 
 	export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 	ln -s /usr/local/lib/libevent-2.0.so.5 /usr/lib/libevent-2.0.so.5
