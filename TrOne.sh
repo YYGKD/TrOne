@@ -23,7 +23,7 @@ install_start()
 	cd /root
 	wget https://github.com/Haknima/TrOne/raw/master/package/libevent-2.1.8-stable.tar.gz
 	tar -zxf libevent-2.1.8-stable.tar.gz
-	cd libevent-2.1.8-stable.tar.gz
+	cd libevent-2.1.8-stable
 	./configure
 	make && make install
 	export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
