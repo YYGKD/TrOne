@@ -28,7 +28,6 @@ install_start()
 	./configure --prefix=/usr/local/libiconv
 	make -s
 	make -s install
-	echo "/usr/local/lib" >> /etc/ld.so.conf /sbin/ldconfig
 
 	cd /root
 	wget https://github.com/Haknima/TrOne/raw/master/package/libevent-2.0.21-stable.tar.gz
@@ -37,7 +36,6 @@ install_start()
 	./configure
 	make -s
 	make -s install
-
 
 	export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 	ln -s /usr/local/lib/libevent-2.0.so.5 /usr/lib/libevent-2.0.so.5
@@ -58,7 +56,7 @@ install_transmission()
 	wget https://github.com/Haknima/TrOne/raw/master/package/transmission-${version}.tar.xz
 	tar -xf transmission*.tar.xz
 	cd transmission*
-	./configure --prefix=/usr
+	./configure --prefix=/usr CFLAGS=-liconv
 	make -s
 	make -s install
 
