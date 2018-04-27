@@ -11,7 +11,8 @@ install_start()
 	rm -rf /home/transmission
 	rm -rf /usr/share/transmission
 	rm -rf /etc/init.d/transmissiond
-	yum install -y epel-release xz gcc gcc-c++ m4 make automake libtool gettext openssl-devel pkgconfig perl-libwww-perl perl-XML-Parser curl curl-devel libidn-devel zlib-devel which libevent
+	yum install -y epel-release xz gcc gcc-c++ m4 make automake libtool gettext openssl-devel pkgconfig perl-libwww-perl perl-XML-Parser curl curl-devel libidn-devel zlib-devel which
+	yum remove libevent
 
 	cd /root
 	wget https://github.com/Haknima/TrOne/raw/master/package/intltool-0.40.6.tar.gz
