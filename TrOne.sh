@@ -21,14 +21,6 @@ install_start()
 	make -s
 	make -s install
 
-	cd /root	
-	wget https://github.com/Haknima/TrOne/raw/master/package/libiconv-1.13.1.tar.gz	
-	tar -zxf libiconv*
-	cd libiconv*
-	./configure --prefix=/usr/local/libiconv
-	make -s
-	make -s install
-
 	cd /root
 	wget https://github.com/Haknima/TrOne/raw/master/package/libevent-2.0.21-stable.tar.gz
 	tar -zxf libevent*
