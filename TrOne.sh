@@ -48,7 +48,7 @@ install_transmission()
 	wget https://github.com/Haknima/TrOne/raw/master/package/transmission-${version}.tar.xz
 	tar -xf transmission*.tar.xz
 	cd transmission*
-	./configure CFLAGS=-liconv --prefix=/usr --host=x86_64
+	./configure --prefix=/usr
 	make -s
 	make -s install
 
